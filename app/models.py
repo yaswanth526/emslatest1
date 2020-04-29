@@ -57,12 +57,12 @@ class User(AbstractBaseUser):
     username=models.CharField(max_length=30,unique=True)
     gender=models.CharField(max_length=6,choices=GENDER_CHOICES)
     photo=models.ImageField(upload_to='profile_photos/')
-    phone = models.IntegerField(blank=True)
+    phone = models.CharField(max_length=25,blank=True)
     date_joined=models.DateTimeField(verbose_name='date joined',auto_now_add=True)
     emergency_contact1_name=models.CharField(max_length=25,blank=True)
-    emergency_contact1=models.IntegerField(blank=True)
+    emergency_contact1=models.CharField(max_length=25,blank=True)
     emergency_contact2_name=models.CharField(max_length=25,blank=True)
-    emergency_contact2=models.IntegerField(blank=True)
+    emergency_contact2=models.CharField(max_length=25,blank=True)
     employee_type=models.CharField(max_length=25,blank=True,choices=EMPLOYEMENT_TYPE)
     first_name=models.CharField(max_length=30,blank=True)
     last_name=models.CharField(max_length=30,blank=True)
@@ -71,7 +71,6 @@ class User(AbstractBaseUser):
     is_active=models.BooleanField(default=True)
     is_staff=models.BooleanField(default=False)
     is_superuser= models.BooleanField(default=False)
-
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 

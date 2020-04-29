@@ -8,9 +8,9 @@ class PlaceholderMixin:
         field_names = [field_name for field_name, _ in self.fields.items()]
         self.fields['email'].widget.attrs.update({'pattern':'[a-zA-Z]+[a-zA-Z0-9]+.apss@gmail.com','title':'Use only endwith ".apss@gmail.com"  and starts with character'})
         self.fields['username'].widget.attrs.update({ 'pattern':'[a-zA-Z]+','title':'Use only characters'})
-#        self.fields['phone'].widget.attrs.update({ 'pattern':'/(2|3|4|5|6|7|8|9)\d{9}/','title':'Use only integers'})
-#        self.fields['emergency_contact1'].widget.attrs.update({ 'pattern':'/(2|3|4|5|6|7|8|9)\d{9}/','title':'Use only integers'})
-#        self.fields['emergency_contact2'].widget.attrs.update({ 'pattern':'/(2|3|4|5|6|7|8|9)\d{9}/','title':'Use only integers'})
+        self.fields['phone'].widget.attrs.update({ 'pattern':'(2|3|4|5|6|7|8|9)\d{9}','title':'Use only integers'})
+        self.fields['emergency_contact1'].widget.attrs.update({ 'pattern':'(2|3|4|5|6|7|8|9)\d{9}','title':'Use only integers'})
+        self.fields['emergency_contact2'].widget.attrs.update({ 'pattern':'(2|3|4|5|6|7|8|9)\d{9}','title':'Use only integers'})
         self.fields['first_name'].widget.attrs.update({ 'pattern':'[a-zA-Z]+','title':'Use only characters'})
         self.fields['last_name'].widget.attrs.update({ 'pattern':'[a-zA-Z]+','title':'Use only characters'})
         for field_name in field_names:
