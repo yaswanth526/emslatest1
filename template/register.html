@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+<h1></h1>
+
+{%if d%}
+<div class="container">
+  <div class="alert alert-warning alert-dismissible">
+ <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+ <strong>Warning!</strong> Your Password And Re_Password Doesnt Match
+</div>
+</div>
+{%else%}
+{%endif%}
+{%if b%}
+<div class="container">
+  <div class="alert alert-warning alert-dismissible">
+ <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+ <strong>Success!</strong> Your registration successfull
+</div>
+</div>
+						<li><a  class='nav-bar'href="{%url 'ems:user_login'%}">login</a></li>
+{%else%}
+  <div class="container">
+
+  <form class="form" enctype="multipart/form-data" method="POST">
+    {%csrf_token%}
+    {{form.as_ul}}
+    <p><input type="checkbox" onclick="myFunction()"> Show Password <br></p>
+
+  <li><label for="re_password">re_password</label>
+  <input type="password" name="re_password" value="" placeholder="re_password" id="id_re_password">
+</li>
+<p>
+      <input type="checkbox" onclick="myFunction1()"> Show Password <br>
+  </p>
+  <p>  <input type="submit" name="submit"class="btn btn-success" value="register" >        </p>
+  </form>
+</div>
+{%endif%}
+  </body>
+  <script>
+  function myFunction1() {
+    var x = document.getElementById("id_re_password");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+  function myFunction() {
+    var x = document.getElementById("id_password");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+  </script>
+
+</html>

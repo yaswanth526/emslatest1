@@ -1,0 +1,88 @@
+{%extends 'entered.html' %}
+{%block container%}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  </head>
+  <body>
+<div class="container">
+
+    {% if d%}
+    <!--<button type="button" id="timesheetloginbutton"name="timesheetloginbutton">ENTER_TIMESHEET</button>-->
+    <form  method="POST">
+
+       {% csrf_token %}
+       {{form1.as_p}}
+          <button type="submit" name="timesheetloginbutton" class="btn btn-success">Submit</button>
+       </form>
+    {%else%}
+
+        {% if b%}
+        <!--<button type="button" id="timesheetloginbutton"name="timesheetloginbutton">ENTER_TIMESHEET</button>-->
+        {% if c %}
+      {% else%}
+      <div class="container">
+
+      <div class="alert alert-warning alert-dismissible">
+     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+     <strong>Success!</strong> Your login sheet filled.
+    </div>
+    </div>
+
+      {%endif%}
+        <form  method="POST">
+
+           {% csrf_token %}
+           <div class="form-group">
+           <label for="Login">Login Time</label>
+           <input type="text" class="form-control" name="project_updated" value="{{store.login}}" disabled>
+           </div>
+           <div class="form-group">
+           <label for="project_updated">Project_Updated</label>
+           <input type="text" class="form-control" name="project_updated" value="{{store.project}}">
+
+           </div>
+           <div class="form-group">
+           <label for="today_work_details">Today_Work_Details</label>
+           <input type="text" class="form-control" name="today_work_details_updated" value="{{store.today_work_details}}">
+         </div>
+
+           {{form2.as_p}}
+
+          <button type="submit" name="timesheetlogoutbutton" class="btn btn-success">Submit</button
+           </form>
+        {%else%}
+        {% if a%}
+{% else%}
+<div class="container">
+
+<div class="alert alert-warning alert-dismissible">
+<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+<strong>Success!</strong> Your logout Time Sheet filled.
+</div>
+</div>
+
+{%endif%}
+        <div class="container">
+        <h2>LOGIN TIME: {{store.login}}</h2>
+            <h2>LEAD NAME: {{store.lead_name}}</h2>
+            <h2>PROJECT NAME: {{store.project}}</h2>
+            <h2>WORK DETAILS: {{store.today_work_details}}</h2>
+        <h2>LOGOUT TIME: {{store.logout}}</h2>
+                <h2>NO OF WORKED HOURS: {{store.hours}}</h2>
+            </div>
+        {%endif%}
+    {%endif%}
+
+    </div>
+  </body>
+</html>
+{% endblock%}

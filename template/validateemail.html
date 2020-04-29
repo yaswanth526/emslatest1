@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  </head>
+  <body>
+    {% if c%}
+    <div class="container">
+      <div class="alert alert-warning alert-dismissible">
+     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+     <strong>Warning!</strong> Your Password changes chances are over only one for a month.
+    </div>
+    </div>
+    						<a href="{%url 'ems:user_login'%}">login</a><br>
+    {%else %}
+    {% if d %}
+    <div class="container">
+      <div class="alert alert-warning alert-dismissible">
+     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+     <strong>Warning!</strong> Your Email is invalid.
+    </div>
+    </div>
+    {% else %}
+
+    {% endif %}
+<h2>Enter Email to send Otp</h2>
+<form  method="POST">
+  {% csrf_token%}
+  {{form.as_p}}
+  <input type="submit" name="validateemailbutton" value="SUBMIT">
+</form>
+{% endif %}
+  </body>
+</html>

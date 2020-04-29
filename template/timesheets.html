@@ -1,0 +1,37 @@
+{%extends 'entered.html' %}
+{%block container%}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+<div class="container">
+      {% if obj %}
+  				<table class="table">
+  					<thead class="table table-hover">
+  						<th>email</th>
+              <th>date</th>
+  						<th>login time</th>
+  						<th>logout</th>
+              <th>workhours</th>
+  					</thead>
+  					{% for detail in obj %}
+  					<tr>
+  						<td>{{ detail.email}}</td>
+  						<td>{{ detail.date}}</td>
+  						<td>{{detail.login}}</td>
+              <td>{{detail.logout}}</td>
+              <td>{{detail.hours}}</td>
+  					</tr>
+  					{% endfor %}
+  				</table>
+  				{%else%}
+  					<p>no records</p>
+  				{%endif%}
+</div>
+  </body>
+</html>
+{%endblock%}

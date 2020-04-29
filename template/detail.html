@@ -1,0 +1,31 @@
+{%extends 'entered.html' %}
+{%block container%}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+<style>
+
+</style>
+  </head>
+  <body>
+
+
+<div class="container">
+        <div >
+    <div >
+                <img id='rcorners3' src="{{user.photo.url}}" alt="USER IMAGE"  height="140" width="140">
+    </div>
+    <div >
+      <h5 id='rcorners2'>Email:{{user.email}}</h5>
+          <h5 id='rcorners2'>Username:{{user.username}}</h5>
+          <h5 id='rcorners2'>Phone Number:{{user.phone}}</h5>
+          <h5 id='rcorners2'>Gender:{{user.gender}}</h5>
+    </div>
+</div>
+</div>
+  </body>
+</html>
+{%endblock%}

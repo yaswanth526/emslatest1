@@ -1,0 +1,166 @@
+{%extends "base.html"%}
+{%block body_block%}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+    <form  method="POST"  >{%csrf_token%}
+      <label for="email">Email</label>
+      <select name="email" required id="email">
+        <option value="">--Select username--</option>
+        {%for email in email%}
+        {%if email.is_admin %}
+        {%else%}
+        <option value="{{email.email}}">{{email.email}}</option>
+        {%endif%}
+        {%endfor%}
+      </select>
+
+      <label for="month">Month</label>
+      <select name="month" id="month">
+
+      </select>
+      <label for="week">Week</label>
+      <select id="select" name="week">
+      </select>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+  <div class="container">
+
+    {%if cemail is None%}
+    {%else%}
+    <h1>showing details for email: {{cemail}}</h1>
+    {%endif%}
+    {%if cmonth is None%}
+    {%else%}
+      <h1>month:{{cmonth}}</h1>
+    {%endif%}
+    {%if cweek is None%}
+    {%else%}
+    <h1> week:{{cweek}}</h1>
+    {%endif%}
+    {%if email_flag is None %}
+    {%else%}
+    <table border="8">
+      <thead>
+        <th>username</th>
+        <th>email</th>
+        <th>photo</th>
+      </thead>
+      <tr>
+        <td>{{ob.username}}</td>
+          <td>{{ob.email}}</td>
+          <td><img src="{{ob.photo.url}}" alt=""style="width:100px;height:100px;"></td>
+      </tr>
+    </table>
+    {% if all%}
+    <table border="4">
+      <thead>
+        <th>email</th>
+        <th>date</th>
+        <th>month</th>
+        <th>week_no</th>
+        <th>login time</th>
+        <th>logout</th>
+        <th>hours</th>
+      </thead>
+      {% for detail in all %}
+      <tr>
+        <td>{{ detail.email}}</td>
+        <td>{{ detail.date}}</td>
+        <td>{{detail.month}}</td>
+        <td>{{detail.week_no}}</td>
+        <td>{{detail.login}}</td>
+        <td>{{detail.logout}}</td>
+        <td>{{detail.hours}}</td>
+      </tr>
+      {% endfor %}
+{%else%}
+<h1>No Records</h1>
+{%endif%}
+    {%endif%}
+    {%if d is None%}
+
+    {%else%}
+    {% if ob %}
+        <table border="4">
+          <thead>
+            <th>email</th>
+            <th>date</th>
+            <th>month</th>
+            <th>week_no</th>
+            <th>login time</th>
+            <th>logout</th>
+            <th>hours</th>
+          </thead>
+          {% for detail in ob %}
+          <tr>
+            <td>{{ detail.email}}</td>
+            <td>{{ detail.date}}</td>
+            <td>{{detail.month}}</td>
+            <td>{{detail.week_no}}</td>
+            <td>{{detail.login}}</td>
+            <td>{{detail.logout}}</td>
+            <td>{{detail.hours}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        {%else%}
+          <p>no records</p>
+        {%endif%}
+      {%endif%}
+</div>
+  <script type="text/javascript">
+  email=$('#email')
+  email.on('change',function()
+  {
+  bc=$('#month');
+  var email=$('#email').val();
+      $.ajax({
+        type:'GET',
+        url: 'ajaxmonth',
+        data: {
+          'email':email
+        },
+        dataType: 'json',
+        success: function (data) {
+                  $('#month').find('option').remove();
+                  //bc=prompt('give number')
+                  bc.append('<option value="">--Select Month--</option>')
+                  for (var i=0;i<data.a1.length;i++){ bc.append('<option value="'+data.a1[i]+'">'+data.a1[i]+'</option>'); }
+        }
+      });
+})
+  a=$('#month')
+  a.on('change',function()
+  {
+  b=$('#select');
+  var month=$('#month').val();
+  var email=$('#email').val();
+      $.ajax({
+        type:'GET',
+        url: 'ajaxweek',
+        data: {
+          'month':month,'email':email
+        },
+        dataType: 'json',
+        success: function (data) {
+                  $('#select').find('option').remove();
+                  //bc=prompt('give number')
+                  b.append('<option value="">--Select Week--</option>')
+                  for (var i=0;i<data.a.length;i++){ b.append('<option value="'+data.a[i]+'">'+data.a[i]+'</option>'); }
+        }
+      });
+})
+  </script>
+
+</html>
+{%endblock%}
